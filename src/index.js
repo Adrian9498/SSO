@@ -18,21 +18,20 @@ const config = {
     authorizationParams: {
         response_type: 'code',
         redirect_uri: 'http://localhost:5173'
-    }
+    },
+    session: (
+        {
+            cookie: {
+                sameSite: 'None', 
+                secure: true
+            }
+        })
 };
 
 
 
 async function iniciarServidor(){
-    app.use(session(
-        {
-            secret: 'SUPERMEGACALIFRAGILISTICSPIR',
-            resave: false,
-            saveUninitialized: true,
-            cookie: {
-                sameSite: 'None', 
-                secure: true}
-        }));
+    
     app.use(morgan('combined'));
     app.use(auth(config));
     app.use(cors({
