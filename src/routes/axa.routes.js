@@ -9,7 +9,7 @@ router.get("/authorized",(req,res)=>{
     const cookieValue = req.cookies; 
 
     if(!cookieValue.auth_verification){
-        res.send('http://localhost:3000/login')
+        res.send('https://sso-production.up.railway.app/login')
         return 
     }
     res.send("OK")
