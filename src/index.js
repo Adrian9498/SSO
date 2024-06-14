@@ -11,7 +11,7 @@ const config = {
     authRequired:false,
     auth0Logout:true,
     baseURL: 'http://localhost:3000',
-    clientID: 'enRAcnv3B58OpxWoNgU7DlQoLiqe2jen',
+    clientID: '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE',
     clientSecret:"sUWDDvELTKmg4sbZ1FebregIZFooao-15A03EcJBhVVjTdPMtX15GDuILjaXpYaQ",
     secret: 'SUPERMEGACALIFRAGILISTICSPIR',
     issuerBaseURL: 'https://visabenefits-auth-test.axa-assistance.us',
