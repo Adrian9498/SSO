@@ -9,7 +9,7 @@ router.get("/authorized",(req,res)=>{
     const cookieValue = req.cookies; 
     console.log("cookieValue", cookieValue);
     if(!cookieValue.auth_verification){
-        res.send('https://visabenefits-auth-test.axa-assistance.us/login')
+        res.send('https://sso-production.up.railway.app/login')
         return 
     }
     res.send("OK")
