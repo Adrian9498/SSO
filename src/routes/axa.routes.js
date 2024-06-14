@@ -15,4 +15,8 @@ router.get("/authorized",(req,res)=>{
     res.send("OK")
 })
 
+router.get("/logout",(req,res)=>{
+    res.redirect("https://visabenefits-auth-test.axa-assistance.us/logout");
+})
+
 export default router;
