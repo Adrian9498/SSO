@@ -4,6 +4,7 @@ import router from './routes/axa.routes.js';
 import { auth } from 'express-openid-connect';  
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan';
+import session from 'express-session';
 
 const app = express();
 const config = {
@@ -23,6 +24,15 @@ const config = {
 
 
 async function iniciarServidor(){
+    app.use(session(
+        {
+            secret: 'SUPERMEGACALIFRAGILISTICSPIR',
+            resave: false,
+            saveUninitialized: true,
+            cookie: {
+                sameSite: 'None', 
+                secure: true}
+        }));
     app.use(morgan('combined'));
     app.use(auth(config));
     app.use(cors({
