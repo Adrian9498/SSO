@@ -10,7 +10,7 @@ const app = express();
 const config = {
     authRequired:false,
     auth0Logout:true,
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://qa.conciergeforplatinum.com',
     clientID: '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE',
     clientSecret:"sUWDDvELTKmg4sbZ1FebregIZFooao-15A03EcJBhVVjTdPMtX15GDuILjaXpYaQ",
     secret: 'SUPERMEGACALIFRAGILISTICSPIR',
