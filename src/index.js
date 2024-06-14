@@ -23,7 +23,7 @@ const config = {
         {
             cookie: {
                 sameSite: 'None', 
-                secure: true
+                secure: false
             }
         })
 };
