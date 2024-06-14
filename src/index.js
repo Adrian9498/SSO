@@ -35,7 +35,7 @@ async function iniciarServidor(){
     app.use(morgan('combined'));
     app.use(auth(config));
     app.use(cors({
-        origin: 'http://localhost:5173', // Reemplaza con el origen de tu aplicación React
+        origin: 'https://qa.conciergeforplatinum.com', // Reemplaza con el origen de tu aplicación React
         credentials: true // Permite el envío de cookies y encabezados de autorización
     }));
     app.use(cookieParser());
