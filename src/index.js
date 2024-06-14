@@ -3,6 +3,7 @@ import cors from 'cors';
 import router from './routes/axa.routes.js';
 import { auth } from 'express-openid-connect';  
 import cookieParser from 'cookie-parser'
+import morgan from 'morgan';
 
 const app = express();
 const config = {
@@ -22,7 +23,7 @@ const config = {
 
 
 async function iniciarServidor(){
-
+    app.use(morgan('combined'));
     app.use(auth(config));
     app.use(cors({
         origin: 'http://localhost:5173', // Reemplaza con el origen de tu aplicación React
