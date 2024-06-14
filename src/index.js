@@ -12,12 +12,12 @@ const config = {
     auth0Logout:true,
     baseURL: 'http://localhost:3000',
     clientID: 'enRAcnv3B58OpxWoNgU7DlQoLiqe2jen',
-    clientSecret:"7FG-eM4IvwQDPkvXThfqxdOnQl534OpbiNJtw4UWlKKau65eA9oEZZbZJnKzuUbC",
+    clientSecret:"sUWDDvELTKmg4sbZ1FebregIZFooao-15A03EcJBhVVjTdPMtX15GDuILjaXpYaQ",
     secret: 'SUPERMEGACALIFRAGILISTICSPIR',
-    issuerBaseURL: 'https://dev-cj15wcvegfag4o8t.us.auth0.com',
+    issuerBaseURL: 'https://visabenefits-auth-test.axa-assistance.us',
     authorizationParams: {
         response_type: 'code',
-        redirect_uri: 'http://localhost:5173'
+        redirect_uri: 'https://qa.conciergeforplatinum.com'
     },
     session: (
         {
