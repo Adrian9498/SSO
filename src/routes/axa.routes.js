@@ -25,6 +25,7 @@ router.post("/authorized",async (req,res)=>{
             grant_type: 'authorization_code',
             client_id: '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE',
             code: datos.code,
+            scope: 'openid urn:axa.partners.specific.visagateway.customers.read_only profile email',
             lang: 'es-ES',
             client_secret: 'sUWDDvELTKmg4sbZ1FebregIZFooao-15A03EcJBhVVjTdPMtX15GDuILjaXpYaQ',
             redirect_uri: 'https://qa.conciergeforplatinum.com',
