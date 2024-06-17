@@ -13,7 +13,7 @@ const config = {
     clientID: '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE',
     clientSecret:"sUWDDvELTKmg4sbZ1FebregIZFooao-15A03EcJBhVVjTdPMtX15GDuILjaXpYaQ",
     secret: 'SUPERMEGACALIFRAGILISTICSPIR',
-    issuerBaseURL: 'https://visabenefits-auth-test.axa-assistance.us/.well-known/jwks.json',
+    issuerBaseURL: 'https://visabenefits-auth-test.axa-assistance.us',
     authorizationParams: {
         response_type: 'code',
         redirect_uri: 'https://qa.conciergeforplatinum.com'
