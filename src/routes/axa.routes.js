@@ -5,13 +5,18 @@ const router = Router();
 
 router.post("/test",test)
 
-router.get("/authorized",(req,res)=>{
+router.post("/authorized",(req,res)=>{
     const cookieValue = req.cookies; 
     console.log("cookieValue", cookieValue);
+
+    const datos = req.body;
+    console.log('Datos recibidos:', datos);
+
     if(!cookieValue.auth_verification){
         res.send('https://sso-production.up.railway.app/login')
         return 
     }
+
     res.send("OK")
 })
 

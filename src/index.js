@@ -28,15 +28,13 @@ const config = {
         })
 };
 
-
-
 async function iniciarServidor(){
     
     app.use(morgan('combined'));
     app.use(auth(config));
     app.use(cors({
-        origin: 'https://qa.conciergeforplatinum.com', // Reemplaza con el origen de tu aplicación React
-        credentials: true // Permite el envío de cookies y encabezados de autorización
+        origin: 'https://qa.conciergeforplatinum.com',
+        credentials: true
     }));
     app.use(cookieParser());
     app.use(express.json())
