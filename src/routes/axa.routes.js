@@ -45,7 +45,7 @@ router.post("/authorized",async (req,res)=>{
 
             const customer_data_petition = await axios.get(apihubUrl, {
                 headers: {
-                    Authorization: tokens.access_token
+                    Authorization: `Bearer ${tokens.access_token}`
                 }
             })
             const customer_data = customer_data_petition.data;
