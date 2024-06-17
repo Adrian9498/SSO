@@ -3,14 +3,14 @@ import { test } from "../controllers/controllers.js";
 import axios from "axios";
 import querystring from 'querystring'
 import getCodeVerifier from '../utils/getCodeVerifier.js'
-import { jwtDecode } from "jwt-decode";
-import { log } from "console";
 
 const router = Router();
 
 router.post("/test",test)
 
 router.post("/authorized",async (req,res)=>{
+    const cookieValue = req.cookies; 
+    const datos = req.body;
 
     if(!cookieValue.auth_verification){
         res.send('https://sso-production.up.railway.app/login')
