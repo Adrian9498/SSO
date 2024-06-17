@@ -43,14 +43,17 @@ router.post("/authorized",async (req,res)=>{
             const customerId = decoded.sub.split('|', 2)[1];
             const apihubUrl = `https://apiserviceaxa-qa.conciergeforplatinum.com/apihub/${customerId}/infoCustomer`
 
-            const customer_data_petition = await axios.get(apihubUrl, {
-                headers: {
-                    Authorization: `Bearer ${tokens.access_token}`
-                }
-            })
-            const customer_data = customer_data_petition.data;
+            console.log("Customer id: ", customerId);
+            console.log("Token: ",tokens.access_token);
 
-            console.log(customer_data);
+            // const customer_data_petition = await axios.get(apihubUrl, {
+            //     headers: {
+            //         Authorization: `Bearer ${tokens.access_token}`
+            //     }
+            // })
+            // const customer_data = customer_data_petition.data;
+
+            // console.log(customer_data);
 
         } catch (error) {
             console.error('Error al obtener el token:', error.response ? error.response.data : error.message);
