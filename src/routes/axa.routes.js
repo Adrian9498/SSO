@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { test } from "../controllers/controllers.js";
+import axios from "axios";
+import getCodeVerifier from '../utils/getCodeVerifier.js'
 
 const router = Router();
 
@@ -19,12 +21,13 @@ router.post("/authorized",async (req,res)=>{
     
     if(datos.code !== ''){
         const tokenUrl = `https://visabenefits-auth-test.axa-assistance.us/oauth/token`;
+        const code_verifier = getCodeVerifier(cookieValue.auth_verification);
         const data = {
             grant_type: 'authorization_code',
             client_id: '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE',
             code: datos.code,
             redirect_uri: 'https://qa.conciergeforplatinum.com',
-            code_verifier: cookieValue.auth_verification.code_verifier
+            code_verifier: code_verifier
         };
 
         console.log("Los datos a enviar son: ", data)
