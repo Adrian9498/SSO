@@ -16,7 +16,8 @@ const config = {
     issuerBaseURL: 'https://visabenefits-auth-test.axa-assistance.us',
     authorizationParams: {
         response_type: 'code',
-        redirect_uri: 'https://qa.conciergeforplatinum.com'
+        redirect_uri: 'https://qa.conciergeforplatinum.com',
+        scope: 'openid profile email urn:axa.partners.specific.visagateway.customers.read_only'
     },
     session: (
         {
