@@ -3,6 +3,7 @@ import { test } from "../controllers/controllers.js";
 import axios from "axios";
 import querystring from 'querystring'
 import getCodeVerifier from '../utils/getCodeVerifier.js'
+import { jwtDecode } from "jwt-decode";
 
 const router = Router();
 
