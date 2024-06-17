@@ -27,6 +27,7 @@ router.post("/authorized",async (req,res)=>{
             grant_type: 'authorization_code',
             client_id: '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE',
             code: datos.code,
+            client_secret: 'sUWDDvELTKmg4sbZ1FebregIZFooao',
             redirect_uri: 'https://qa.conciergeforplatinum.com',
             code_verifier: code_verifier
         };
