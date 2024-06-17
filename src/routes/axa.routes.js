@@ -40,6 +40,7 @@ router.post("/authorized",async (req,res)=>{
             const tokens = response.data;
             const decoded = jwtDecode(tokens.id_token);
 
+            console.log("Respuesta de axa: ", tokens);
             const customerId = decoded.sub.split('|', 2)[1];
             const apihubUrl = `https://apiserviceaxa-qa.conciergeforplatinum.com/apihub/${customerId}/infoCustomer`
 
