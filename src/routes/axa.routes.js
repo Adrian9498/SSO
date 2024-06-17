@@ -43,7 +43,11 @@ router.post("/authorized",async (req,res)=>{
             const customerId = decoded.sub.split('|', 2)[1];
             const apihubUrl = `https://apiserviceaxa-qa.conciergeforplatinum.com/apihub/${customerId}/infoCustomer`
 
-            const customer_data_petition = await axios.get(apihubUrl)
+            const customer_data_petition = await axios.get(apihubUrl, {
+                headers: {
+                    Authorization: tokens.access_token
+                }
+            })
             const customer_data = customer_data_petition.data;
 
             console.log(customer_data);
