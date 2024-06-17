@@ -17,7 +17,7 @@ const config = {
     authorizationParams: {
         response_type: 'code',
         redirect_uri: 'https://qa.conciergeforplatinum.com',
-        scope: 'openid urn:axa.partners.specific.visagateway.customers.read_only profile email'
+        scope: 'openid urn:axa.partners.specific.visagateway.customers.read_only profile email offline_access'
     },
     session: (
         {
