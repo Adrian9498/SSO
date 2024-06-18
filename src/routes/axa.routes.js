@@ -3,20 +3,19 @@ import axios from "axios";
 import querystring from 'querystring'
 import getCodeVerifier from '../utils/getCodeVerifier.js'
 import { jwtDecode } from "jwt-decode";
-const base64url = require('base64url');
-const cryptoRandomString = require('crypto-random-string');
+import generatePKCEPair from '../utils/generatePKCEpair.js'
 
 const router = Router();
 
 const client_id = '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE';
 const redirect_uri = 'https://qa.conciergeforplatinum.com';
-const auth0_domain = 'https://visabenefits-auth-test.axa-assistance.us';
+const auth0_domain = 'visabenefits-auth-test.axa-assistance.us';
 const client_secret = 'sUWDDvELTKmg4sbZ1FebregIZFooao-15A03EcJBhVVjTdPMtX15GDuILjaXpYaQ';
 
-router.post("/try_login", async () => {
-    const code_verifier = cryptoRandomString({ length: 64, type: 'base64url' });
-
-    const code_challenge = base64url.fromBase64(cryptoRandomString({ length: 32, type: 'base64' }));
+router.get("/try_login", async (req, res) => {
+    const pkce_data = generatePKCEPair();
+    const code_verifier = pkce_data.verifier;
+    const code_challenge = pkce_data.challenge;
 
     const authorize_url = `https://${auth0_domain}/authorize`;
 
