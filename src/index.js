@@ -8,14 +8,17 @@ import session from 'express-session';
 const app = express();
 const config = {};
 const sessionConfig = session({
-    name: 'prueba',
-    secret: 'SUPERMEGACALIFRAGILISTICSPIR',
+    secret: 'SUPERMEGACALIFRAGILISTICSPIR', 
     resave: false,
-    saveUninitialized: false
-})
+    saveUninitialized: true,
+    store: new session.MemoryStore(), 
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 
+    }
+  })
 
 async function iniciarServidor(){
-    
+
     app.use(sessionConfig)
 
     app.use(auth({
@@ -32,7 +35,7 @@ async function iniciarServidor(){
             redirect_uri: 'https://qa.conciergeforplatinum.com',
             scope: 'openid urn:axa.partners.specific.visagateway.customers.read_only profile email offline_access'
         },
-        session: sessionConfig
+        session: { store: new session.MemoryStore() }
     }));
     app.use(cors({
         origin: 'https://qa.conciergeforplatinum.com',
