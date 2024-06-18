@@ -3,28 +3,15 @@ import cors from 'cors';
 import router from './routes/axa.routes.js';
 import { auth } from 'express-openid-connect';  
 import cookieParser from 'cookie-parser'
-import session from 'express-session';
 
 const app = express();
 const config = {};
-const sessionConfig = session({
-    name: 'session-prueba',
-    secret: 'SUPERMEGACALIFRAGILISTICSPIR', 
-    resave: false,
-    saveUninitialized: true,
-    store: new session.MemoryStore(), 
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24 
-    }
-  })
 
 async function iniciarServidor(){
-
-    app.use(sessionConfig)
-
+    
     app.use(auth({
         authRequired:false,
-        idpLogout:true,
+        idpLogout: true,
         auth0Logout:true,
         baseURL: 'https://sso-production.up.railway.app/login',
         clientID: '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE',
@@ -36,7 +23,14 @@ async function iniciarServidor(){
             redirect_uri: 'https://qa.conciergeforplatinum.com',
             scope: 'openid urn:axa.partners.specific.visagateway.customers.read_only profile email offline_access'
         },
-        session: { store: new session.MemoryStore() }
+        session: (
+            {
+                cookie: {
+                    sameSite: 'None', 
+                    secure: false,
+                    domain: 'qa.conciergeforplatinum.com'
+                }
+            })
     }));
     app.use(cors({
         origin: 'https://qa.conciergeforplatinum.com',

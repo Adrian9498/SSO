@@ -13,10 +13,6 @@ router.post("/authorized",async (req,res)=>{
     const cookieValue = req.cookies; 
     const datos = req.body;
 
-    const sessionData = req.session;
-
-    console.log("Los datos de sessión son:", sessionData);
-
     if(!cookieValue.auth_verification){
         res.json({ status: 'https://sso-production.up.railway.app/login' })
         return 
@@ -44,8 +40,6 @@ router.post("/authorized",async (req,res)=>{
             });
             const tokens = response.data;
             const decoded = jwtDecode(tokens.id_token);
-
-            console.log("Datos de Axa: ", tokens);
 
             const customerId = decoded.sub.split('|', 2)[1];
             const apihubUrl = `https://apiserviceaxa-qa.conciergeforplatinum.com/apihub/${customerId}/infoCustomer`
