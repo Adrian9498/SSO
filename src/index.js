@@ -27,7 +27,8 @@ async function iniciarServidor(){
             {
                 cookie: {
                     sameSite: 'None', 
-                    secure: false
+                    secure: false,
+                    domain: '.conciergeforplatinum.com'
                 }
             })
     }));
