@@ -91,8 +91,6 @@ router.post("/refresh", async (req, res) => {
         const tokens = response.data;
         const decoded = jwtDecode(tokens.id_token);
 
-        console.log("Datos de Axa: ", tokens);
-
         const customerId = decoded.sub.split('|', 2)[1];
         const apihubUrl = `https://apiserviceaxa-qa.conciergeforplatinum.com/apihub/${customerId}/infoCustomer`
 
@@ -103,7 +101,9 @@ router.post("/refresh", async (req, res) => {
         })
         const customer_data = customer_data_petition.data;
 
-        console.log(customer_data);
+        res.json({status: "OK", ...customer_data, refresh_token: tokens.refresh_token})
+
+        return
     } catch (error) {
         console.error('Error al obtener el token:', error.response ? error.response.data : error.message);
         res.status(500).json({ error: 'Failed to get token' });
