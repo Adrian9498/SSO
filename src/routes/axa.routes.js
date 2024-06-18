@@ -1,13 +1,37 @@
 import { Router } from "express";
-import { test } from "../controllers/controllers.js";
 import axios from "axios";
 import querystring from 'querystring'
 import getCodeVerifier from '../utils/getCodeVerifier.js'
 import { jwtDecode } from "jwt-decode";
+const base64url = require('base64url');
+const cryptoRandomString = require('crypto-random-string');
 
 const router = Router();
 
-router.post("/test",test)
+const client_id = '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE';
+const redirect_uri = 'https://qa.conciergeforplatinum.com';
+const auth0_domain = 'https://visabenefits-auth-test.axa-assistance.us';
+const client_secret = 'sUWDDvELTKmg4sbZ1FebregIZFooao-15A03EcJBhVVjTdPMtX15GDuILjaXpYaQ';
+
+router.post("/try_login", async () => {
+    const code_verifier = cryptoRandomString({ length: 64, type: 'base64url' });
+
+    const code_challenge = base64url.fromBase64(cryptoRandomString({ length: 32, type: 'base64' }));
+
+    const authorize_url = `https://${auth0_domain}/authorize`;
+
+    const params = {
+        response_type: 'code',
+        client_id: client_id,
+        redirect_uri: redirect_uri,
+        code_challenge_method: 'S256',
+        code_challenge: code_challenge,
+        code_verifier: code_verifier
+    };
+
+    const redirectUrl = authorize_url + '?' + new URLSearchParams(params);
+    res.redirect(redirectUrl);
+})
 
 router.post("/authorized",async (req,res)=>{
     const cookieValue = req.cookies; 
