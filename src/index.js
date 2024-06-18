@@ -3,12 +3,21 @@ import cors from 'cors';
 import router from './routes/axa.routes.js';
 import { auth } from 'express-openid-connect';  
 import cookieParser from 'cookie-parser'
+import session from 'express-session';
 
 const app = express();
 const config = {};
+const sessionConfig = session({
+    name: 'prueba',
+    secret: 'SUPERMEGACALIFRAGILISTICSPIR',
+    resave: false,
+    saveUninitialized: false
+})
 
 async function iniciarServidor(){
     
+    app.use(sessionConfig)
+
     app.use(auth({
         authRequired:false,
         idpLogout:true,
@@ -23,13 +32,7 @@ async function iniciarServidor(){
             redirect_uri: 'https://qa.conciergeforplatinum.com',
             scope: 'openid urn:axa.partners.specific.visagateway.customers.read_only profile email offline_access'
         },
-        session: (
-            {
-                cookie: {
-                    sameSite: 'None', 
-                    secure: false
-                }
-            })
+        session: sessionConfig
     }));
     app.use(cors({
         origin: 'https://qa.conciergeforplatinum.com',
