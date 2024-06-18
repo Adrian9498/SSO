@@ -3,35 +3,34 @@ import cors from 'cors';
 import router from './routes/axa.routes.js';
 import { auth } from 'express-openid-connect';  
 import cookieParser from 'cookie-parser'
-import morgan from 'morgan';
 
 const app = express();
-const config = {
-    authRequired:false,
-    auth0Logout:true,
-    baseURL: 'https://sso-production.up.railway.app/login',
-    clientID: '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE',
-    clientSecret:"sUWDDvELTKmg4sbZ1FebregIZFooao-15A03EcJBhVVjTdPMtX15GDuILjaXpYaQ",
-    secret: 'SUPERMEGACALIFRAGILISTICSPIR',
-    issuerBaseURL: 'https://visabenefits-auth-test.axa-assistance.us',
-    authorizationParams: {
-        response_type: 'code',
-        redirect_uri: 'https://qa.conciergeforplatinum.com',
-        scope: 'openid urn:axa.partners.specific.visagateway.customers.read_only profile email offline_access'
-    },
-    session: (
-        {
-            cookie: {
-                sameSite: 'None', 
-                secure: false
-            }
-        })
-};
+const config = 
 
 async function iniciarServidor(){
     
-    app.use(morgan('combined'));
-    app.use(auth(config));
+    app.use(auth({
+        authRequired:false,
+        idpLogout:true,
+        auth0Logout:true,
+        baseURL: 'https://sso-production.up.railway.app/login',
+        clientID: '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE',
+        clientSecret:"sUWDDvELTKmg4sbZ1FebregIZFooao-15A03EcJBhVVjTdPMtX15GDuILjaXpYaQ",
+        secret: 'SUPERMEGACALIFRAGILISTICSPIR',
+        issuerBaseURL: 'https://visabenefits-auth-test.axa-assistance.us',
+        authorizationParams: {
+            response_type: 'code',
+            redirect_uri: 'https://qa.conciergeforplatinum.com',
+            scope: 'openid urn:axa.partners.specific.visagateway.customers.read_only profile email offline_access'
+        },
+        session: (
+            {
+                cookie: {
+                    sameSite: 'None', 
+                    secure: false
+                }
+            })
+    }));
     app.use(cors({
         origin: 'https://qa.conciergeforplatinum.com',
         credentials: true
