@@ -8,6 +8,7 @@ import session from 'express-session';
 const app = express();
 const config = {};
 const sessionConfig = session({
+    name: 'session-prueba',
     secret: 'SUPERMEGACALIFRAGILISTICSPIR', 
     resave: false,
     saveUninitialized: true,

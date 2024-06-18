@@ -13,6 +13,10 @@ router.post("/authorized",async (req,res)=>{
     const cookieValue = req.cookies; 
     const datos = req.body;
 
+    const sessionData = req.session;
+
+    console.log("Los datos de sessión son:", sessionData);
+
     if(!cookieValue.auth_verification){
         res.json({ status: 'https://sso-production.up.railway.app/login' })
         return 
