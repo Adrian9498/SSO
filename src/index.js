@@ -5,7 +5,6 @@ import { auth } from 'express-openid-connect';
 import cookieParser from 'cookie-parser'
 
 const app = express();
-const config = 
 
 async function iniciarServidor(){
     
