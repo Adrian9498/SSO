@@ -3,6 +3,7 @@ import cors from 'cors';
 import router from './routes/axa.routes.js';
 import { auth } from 'express-openid-connect';  
 import cookieParser from 'cookie-parser'
+import { NODE_ENV, PORT, CLIENT_ID, AUTH0_DOMAIN } from '../config.js'
 const app = express();
 
 async function iniciarServidor(){
@@ -36,12 +37,14 @@ async function iniciarServidor(){
     app.use(express.json())
     app.use(express.urlencoded({extended: false}))
     app.use(router)
-    app.listen(3000)
-    console.log("Servidor prendido en el puerto 3000")
+    app.listen(8080)
+    console.log(`Servidor prendido en el puerto ${PORT}`)
     console.log('Node.js version:', process.version);
     console.log('Environment Variables:', {
-      RAILWAY_ENVIRONMENT: process.env.RAILWAY_ENVIRONMENT_NAME,
-      NODE_ENV: process.env.NODE_ENV,
+      Ambiente: NODE_ENV,
+      Puerto: PORT,
+      Cliente: CLIENT_ID,
+      Dominio: AUTH0_DOMAIN
     });
 }
 
