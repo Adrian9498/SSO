@@ -4,6 +4,7 @@ import querystring from 'querystring'
 import getCodeVerifier from '../utils/getCodeVerifier.js'
 import { jwtDecode } from "jwt-decode";
 import generatePKCEPair from '../utils/generatePKCEpair.js'
+import crypto from 'crypto'
 
 const router = Router();
 
