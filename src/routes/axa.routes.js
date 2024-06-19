@@ -13,7 +13,7 @@ const redirect_uri = 'https://qa.conciergeforplatinum.com';
 const auth0_domain = 'visabenefits-auth-test.axa-assistance.us';
 const client_secret = 'sUWDDvELTKmg4sbZ1FebregIZFooao-15A03EcJBhVVjTdPMtX15GDuILjaXpYaQ';
 
-app.get('/health', (_req, res) => {
+router.get('/health', (_req, res) => {
     res.status(200).json({
       status: 'UP',
       timestamp: new Date().toISOString()
