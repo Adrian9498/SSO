@@ -25,6 +25,7 @@ router.get("/try_login", async (req, res) => {
     const params = {
         response_type: 'code',
         state: uuid,
+        scope: 'openid urn:axa.partners.specific.visagateway.customers.read_only profile email offline_access',
         client_id: client_id,
         redirect_uri: redirect_uri,
         code_challenge_method: 'S256',
