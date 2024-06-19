@@ -16,11 +16,14 @@ router.get("/try_login", async (req, res) => {
     const pkce_data = generatePKCEPair();
     const code_verifier = pkce_data.verifier;
     const code_challenge = pkce_data.challenge;
-
+    const uuid = crypto.randomUUID();
     const authorize_url = `https://${auth0_domain}/authorize`;
+
+    console.log("El verifier para: ", uuid, " es: ", code_verifier);
 
     const params = {
         response_type: 'code',
+        state: uuid,
         client_id: client_id,
         redirect_uri: redirect_uri,
         code_challenge_method: 'S256',
