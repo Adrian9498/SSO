@@ -3,12 +3,12 @@ import cors from 'cors';
 import router from './routes/axa.routes.js';
 import { auth } from 'express-openid-connect';  
 import cookieParser from 'cookie-parser'
+import statusMonitor from 'express-status-monitor';
 
 const app = express();
-const config = {};
 
 async function iniciarServidor(){
-    
+    app.use(statusMonitor);
     app.use(auth({
         authRequired:false,
         idpLogout: true,
