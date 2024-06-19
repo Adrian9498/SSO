@@ -47,16 +47,17 @@ router.post("/authorized",async (req,res)=>{
     }
     
     if(datos.code !== ''){
-        const tokenUrl = `https://visabenefits-auth-test.axa-assistance.us/oauth/token`;
+        const tokenUrl = `https://${auth0_domain}/oauth/token`;
         const code_verifier = getCodeVerifier(cookieValue.auth_verification);
+        
         const data = {
             grant_type: 'authorization_code',
-            client_id: '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE',
+            client_id: client_id,
             code: datos.code,
             scope: 'openid urn:axa.partners.specific.visagateway.customers.read_only profile email offline_access',
             lang: 'es-ES',
-            client_secret: 'sUWDDvELTKmg4sbZ1FebregIZFooao-15A03EcJBhVVjTdPMtX15GDuILjaXpYaQ',
-            redirect_uri: 'https://qa.conciergeforplatinum.com',
+            client_secret: client_secret,
+            redirect_uri: redirect_uri,
             code_verifier: code_verifier
         };
 
@@ -86,6 +87,7 @@ router.post("/authorized",async (req,res)=>{
         } catch (error) {
             console.error('Error al obtener el token:', error.response ? error.response.data : error.message);
             res.status(500).json({ error: 'Failed to get token' });
+            return
         }
     }
     
@@ -97,14 +99,14 @@ router.post("/authorized",async (req,res)=>{
 router.post("/refresh", async (req, res) => {
     const datos = req.body;
 
-    const tokenUrl = `https://visabenefits-auth-test.axa-assistance.us/oauth/token`;
+    const tokenUrl = `https://${auth0_domain}/oauth/token`;
     const data = {
         grant_type: 'refresh_token',
-        client_id: '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE',
+        client_id: client_id,
         scope: 'openid urn:axa.partners.specific.visagateway.customers.read_only profile email offline_access',
         lang: 'es-ES',
-        client_secret: 'sUWDDvELTKmg4sbZ1FebregIZFooao-15A03EcJBhVVjTdPMtX15GDuILjaXpYaQ',
-        redirect_uri: 'https://qa.conciergeforplatinum.com',
+        client_secret: client_secret,
+        redirect_uri: redirect_uri,
         refresh_token: datos.refresh_token
     };
 
@@ -133,11 +135,13 @@ router.post("/refresh", async (req, res) => {
     } catch (error) {
         console.error('Error al obtener el token:', error.response ? error.response.data : error.message);
         res.status(500).json({ error: 'Failed to get token' });
+        return
     }
 })
 
-router.get("/logout",(req,res)=>{
-    res.redirect("https://visabenefits-auth-test.axa-assistance.us/logout");
+router.get("/attempt_logout",async (req,res)=>{
+    const logoutURL = `https://${auth0_domain}/v2/logout?client_id=${client_id}`;
+    res.redirect(logoutURL)
 })
 
 export default router;
