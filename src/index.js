@@ -1,34 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import router from './routes/axa.routes.js';
-import { auth } from 'express-openid-connect';  
 import cookieParser from 'cookie-parser'
 import { NODE_ENV, PORT, CLIENT_ID, AUTH0_DOMAIN } from '../config.js'
+
 const app = express();
 
 async function iniciarServidor(){
-    app.use(auth({
-        authRequired:false,
-        idpLogout: true,
-        auth0Logout:true,
-        baseURL: 'https://sso-production.up.railway.app/login',
-        clientID: '00ZNI7ED2VfOZ4g2M4mgje81lg1EsqDE',
-        clientSecret:"sUWDDvELTKmg4sbZ1FebregIZFooao-15A03EcJBhVVjTdPMtX15GDuILjaXpYaQ",
-        secret: 'SUPERMEGACALIFRAGILISTICSPIR',
-        issuerBaseURL: 'https://visabenefits-auth-test.axa-assistance.us',
-        authorizationParams: {
-            response_type: 'code',
-            redirect_uri: 'https://qa.conciergeforplatinum.com',
-            scope: 'openid urn:axa.partners.specific.visagateway.customers.read_only profile email offline_access'
-        },
-        session: (
-            {
-                cookie: {
-                    sameSite: 'None', 
-                    secure: false
-                }
-            })
-    }));
     app.use(cors({
         origin: 'https://qa.conciergeforplatinum.com',
         credentials: true
@@ -39,7 +17,6 @@ async function iniciarServidor(){
     app.use(router)
     app.listen(8080)
     console.log(`Servidor prendido en el puerto ${PORT}`)
-    console.log('Node.js version:', process.version);
     console.log('Environment Variables:', {
       Ambiente: NODE_ENV,
       Puerto: PORT,

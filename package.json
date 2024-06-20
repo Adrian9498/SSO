@@ -29,7 +29,8 @@
     "express-openid-connect": "^2.17.1",
     "express-session": "^1.18.0",
     "jwt-decode": "^4.0.0",
-    "querystring": "^0.2.1"
+    "querystring": "^0.2.1",
+    "redis": "^4.6.14"
   },
   "devDependencies": {
     "nodemon": "^3.1.3"
