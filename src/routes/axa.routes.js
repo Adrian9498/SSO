@@ -24,20 +24,16 @@ router.get("/try_login", async (req, res) => {
     const pkce_data = generatePKCEPair();
     const code_verifier = pkce_data.verifier;
     const code_challenge = pkce_data.challenge;
-    const uuid = crypto.randomUUID();
     const authorize_url = `https://${auth0_domain}/authorize`;
-
-    console.log("El verifier para: ", uuid, " es: ", code_verifier);
 
     const params = {
         response_type: 'code',
-        state: uuid,
+        state: code_verifier,
         scope: 'openid urn:axa.partners.specific.visagateway.customers.read_only profile email offline_access',
         client_id: client_id,
         redirect_uri: redirect_uri,
         code_challenge_method: 'S256',
-        code_challenge: code_challenge,
-        code_verifier: code_verifier
+        code_challenge: code_challenge
     };
 
     const redirectUrl = authorize_url + '?' + new URLSearchParams(params);
